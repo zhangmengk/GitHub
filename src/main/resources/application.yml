@@ -1,0 +1,36 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #东八区的时间，用于时间类型出错
+    url: jdbc:mysql:///medical?characterEncoding=utf-8&serverTimezone=GMT%2B8
+
+    #时区不需要更改的时候使用，大概率通用
+    # url: jdbc:mysql:///day100401?characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 3261200
+    type: com.alibaba.druid.pool.DruidDataSource
+
+# 使用thymeleaf需要把下面的后缀给注释掉
+# thymeleaf的前端页面后缀是.html，因为默认的后缀是.html所以不需要配置
+  freemarker:
+    suffix: .ftl
+
+#管理mybatis，配置mapper下面所有的.xml配置文件
+#告诉配置文件实体类在什么地方
+mybatis:
+  mapper-locations: mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.lening.day1007.entity
+
+#配置数据库，告诉程序数据库是mysql
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
